@@ -17,29 +17,20 @@ import {
   GraphQLString
 } from 'graphql';
 
+/**
+ * Import query types.
+ */
 import gqlPost from './post';
 
 /**
- * Export the GraphQL User type.
+ * Export the GraphQL type.
  */
 export default new GraphQLObjectType({
   name: 'User',
   fields: () => ({
-    id: {
-      type: GraphQLInt
-    },
-    firstName: {
-      type: GraphQLString
-    },
-    lastName: {
-      type: GraphQLString
-    },
-    posts: {
-      type: new GraphQLList(gqlPost),
-      resolve: (dbUser, args, context) => {
-        console.log(dbUser);
-        return dbUser.posts;
-      }
-    }
+    firstName: {type: GraphQLString},
+    id: {type: GraphQLInt},
+    lastName: {type: GraphQLString},
+    posts: {type: new GraphQLList(gqlPost)}
   })
 });

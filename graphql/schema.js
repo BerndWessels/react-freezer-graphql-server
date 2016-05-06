@@ -13,15 +13,24 @@
 import {
   GraphQLInt,
   GraphQLObjectType,
-  GraphQLSchema,
-  GraphQLString
+  GraphQLSchema
 } from 'graphql';
 
-import gqlUser from './user';
+/**
+ * Import query types.
+ */
+import gqlPost from './query/post';
+import gqlUser from './query/user';
+
+/**
+ * Import mutation types.
+ */
+import gqlUserUpdate from './mutation/userUpdate';
 
 /**
  * Import database types.
  */
+import dbPost from '../database/post';
 import dbUser from '../database/user';
 
 /**
@@ -40,7 +49,28 @@ var query = new GraphQLObjectType({
       resolve(_, args, context) {
         return dbUser(args, context);
       }
+    },
+    post: {
+      type: gqlPost,
+      args: {
+        id: {
+          type: GraphQLInt
+        }
+      },
+      resolve(_, args, context) {
+        return dbPost(null, args, context);
+      }
     }
+  }
+});
+
+/**
+ * The GraphQL mutations.
+ */
+var mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    userUpdate: gqlUserUpdate
   }
 });
 
@@ -48,6 +78,6 @@ var query = new GraphQLObjectType({
  * Export the GraphQL schema.
  */
 export default new GraphQLSchema({
-  query: query
-  // mutation?: ?GraphQLObjectType
+  query: query,
+  mutation: mutation
 });

@@ -17,32 +17,22 @@ import {
   GraphQLString
 } from 'graphql';
 
+/**
+ * Import query types.
+ */
 import gqlComment from './comment';
 import gqlUser from './user';
 
 /**
- * Export the GraphQL User type.
+ * Export the GraphQL type.
  */
 export default new GraphQLObjectType({
   name: 'Post',
   fields: () => ({
-    id: {
-      type: GraphQLInt
-    },
-    title: {
-      type: GraphQLString
-    },
-    content: {
-      type: GraphQLString
-    },
-    comments: {
-      type: new GraphQLList(gqlComment),
-      resolve: (dbUser, args, context) => {
-        return null;
-      }
-    },
-    user: {
-      type: gqlUser
-    }
+    comments: {type: new GraphQLList(gqlComment)},
+    content: {type: GraphQLString},
+    id: {type: GraphQLInt},
+    title: {type: GraphQLString},
+    user: {type: gqlUser}
   })
 });

@@ -31,3 +31,11 @@ export default (args, context) => {
   }
   return users.find((user) => user.id === args.id);
 }
+
+export function update(fields) {
+  let user = users.find((user) => user.id === fields.id);
+  if(user){
+    return Object.assign(user, fields);
+  }
+  return null;
+}
