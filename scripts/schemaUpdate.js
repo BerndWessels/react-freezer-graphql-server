@@ -33,8 +33,6 @@ export default task('update schema', async() => {
 
   processFields(schema._queryType._typeConfig.name, schema._queryType._typeConfig.fields);
 
-  console.log(JSON.stringify(clientSchema, null, 2));
-
   var output = `export default ${JSON.stringify(clientSchema, null, 2)}`;
   fs.writeFile(path.join(__dirname, '../graphql/schema.client.js'), output);
 });

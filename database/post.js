@@ -8,7 +8,6 @@
  */
 
 export default (user, args, context) => {
-  console.log('post', args);
   if (!args) {
     return null;
   }
@@ -19,5 +18,4 @@ export default (user, args, context) => {
       return {id: id, title: `Post Title ${id}`, content: `Post Content ${id}`, user: user, comments: null};
     });
   }
-  console.log('dfgfdgf');
 }

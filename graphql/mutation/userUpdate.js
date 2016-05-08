@@ -49,7 +49,6 @@ export default mutation({
       type: gqlUser,
       // Parameters are payload from mutateAndGetPayload.
       resolve: ({user, somethingelse}) => {
-        console.log(somethingelse);
         return user;
       }
     }
